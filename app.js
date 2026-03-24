@@ -1,8 +1,14 @@
 const express = require('express');
+const path = require('path');
+
 const app = express();
 
+// Serve static files (CSS)
+app.use(express.static(__dirname));
+
+// Send HTML file
 app.get('/', (req, res) => {
-  res.send("CI/CD Multi Env 🚀");
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(3000);
+app.listen(3000, () => console.log("Server running"));
