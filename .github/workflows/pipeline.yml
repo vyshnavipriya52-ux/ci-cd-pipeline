@@ -54,6 +54,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           docker pull ${{ secrets.DOCKER_USERNAME }}/ci-cd-demo:latest
-          docker stop prod-app || true
-          docker rm prod-app || true
-          docker run -d -p 3001:3000 --name prod-app ${{ secrets.DOCKER_USERNAME }}/ci-cd-demo:latest
+          docker stop $(docker ps -q) || true
+          docker rm $(docker ps -aq) || true
+          docker run -d -p 3000:3000 --name staging-app ${{ secrets.DOCKER_USERNAME }}/ci-cd-demo:latest
